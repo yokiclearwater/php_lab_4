@@ -1,0 +1,11 @@
+{
+    "name": "kosal/lab_4",
+    "description": "Lab 4 Project",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Kosal\\Lab4\\": "src/"
+        }
+    },
+    "require": {}
+}
