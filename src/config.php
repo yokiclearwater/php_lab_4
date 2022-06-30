@@ -2,8 +2,9 @@
     $server="localhost";
     $username="root";
     $password="";
-    $database="login_register";
-    $conn= mysqli_connect($server,$username,$password,$database);
+    $database="lab4";
+    // $conn= new PDO($server,$username,$password,$database);
+    $conn = new PDO("mysql:host=$server;dbname=$database", $username, $password);
 
     if(!$conn){
         echo "<script> alert('Connection Failed!') </script>";

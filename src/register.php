@@ -8,12 +8,27 @@
         $gender = $_POST['gender'];
         $password = md5($_POST['password']);
 
-        $sql = "SELECT * FROM login WHERE email='$email' ";
-        $result = mysqli_query($conn,$sql);
-        if(!$result -> num_rows > 0 ){
-            $sql = "INSERT INTO login(username,email,major,gender,password)
-            VALUES('$username','$email','$major','$gender','$password') ";
-            $result = mysqli_query($conn,$sql);
+        $sql = "SELECT * FROM users WHERE email=?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $email, PDO::PARAM_STR);
+        $stmt->execute();
+
+
+        $result = $stmt->fetchAll();
+
+        if(!$result){
+            $sql = "INSERT INTO users(username,email,major,gender,password)
+            VALUES(?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(1, $username, PDO::PARAM_STR);
+            $stmt->bindValue(2, $email, PDO::PARAM_STR);
+            $stmt->bindValue(3, $major, PDO::PARAM_STR);
+            $stmt->bindValue(4, $gender, PDO::PARAM_STR);
+            $stmt->bindValue(5, $password, PDO::PARAM_STR);
+            $result = $stmt->execute();
+
+
             if($result){
                 echo "<script> alert('Your registration completed.') </script>";
                 $username = "";
@@ -69,7 +84,7 @@
                                 <button name="submit" class="btn btn-primary mb-3">Submit</button><br>
                                 
                                 Already have an account?
-                                <a href="Ex2.php" class="nav-link link-primary ">Login Here</a>
+                                <a href="login.php" class="nav-link link-primary ">Login Here</a>
                             </div>
                         </form>
                     </div>
