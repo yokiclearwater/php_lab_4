@@ -2,7 +2,13 @@
 include 'config.php';
 session_start();
 
-$id = $_SESSION['id'];
+
+
+if(!isset($_SESSION['id'])) {
+    header('Location: login.php');
+} else {
+    $id = $_SESSION['id'];
+}
 
 $query = $fluent->from('products')->where('user_id', $id);
 $products = $query->fetchAll();
@@ -52,9 +58,9 @@ if(isset($_GET['delete'])) {
                                     echo "<tr>";
                                     echo "<th scope='row'>{$row['id']}</th>";
                                     echo "<td>{$row['name']}</td>";
+                                    echo "<td>{$row['amount']}</td>";
                                     echo "<td>{$row['user_id']}</td>";
                                     echo "<td>{$row['price']}</td>";
-                                    echo "<td>{$row['amount']}</td>";
                                     echo "<td>
                                         <button type='button' class='btn btn-info'>View</button>
                                         <button type='button' class='btn btn-success'>Update</button>
