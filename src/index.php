@@ -2,8 +2,6 @@
 include 'config.php';
 session_start();
 
-
-
 if(!isset($_SESSION['id'])) {
     header('Location: login.php');
 } else {
@@ -19,6 +17,11 @@ if(isset($_GET['delete'])) {
     $delete = $query->execute();
     header('Location: index.php');
 }
+// if(isset($_GET['view'])){
+//     $id = $_GET['view'];
+//     $_SESSION['product_id']=$_GET['view'];
+//     header('Location: view_product.php');
+// }
 
 ?>
 
@@ -62,7 +65,7 @@ if(isset($_GET['delete'])) {
                                     echo "<td>{$row['user_id']}</td>";
                                     echo "<td>{$row['price']}</td>";
                                     echo "<td>
-                                        <button type='button' class='btn btn-info'>View</button>
+                                        <a href='view_product.php?view={$row['id']}'><button type='button' class='btn btn-info'>View</button></a>
                                         <button type='button' class='btn btn-success'>Update</button>
                                         <a href='index.php?delete={$row['id']}'><button type='button' class='btn btn-danger'>Delete</button></a>
                                     </td>";
