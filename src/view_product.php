@@ -9,8 +9,6 @@ if(isset($_GET['view'])){
     
 }else{
     $product = array('id'=> 0, 'name'=>'Empty','amount'=>0,'user_id'=>0,'price'=>0);
-   
-
 }
 
 ?>
