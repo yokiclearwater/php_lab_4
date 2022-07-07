@@ -19,11 +19,12 @@ if (isset($_POST['submit'])) {
 
     if ($result) {
         $row = $result[0];
+        $_SESSION['id'] = $row['id'];
         $_SESSION['username'] = $row['username'];
         $_SESSION['gender'] = $row['gender'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['major'] = $row['major'];
-        header("Location: info.php");
+        header("Location: add_product.php");
     } else {
         echo "<script> alert('Email or Password is Wrong!') </script>";
     }
@@ -55,7 +56,6 @@ if (isset($_POST['submit'])) {
                             Don't have an acconunt?
                             <a href="register.php" class=" nav-link link-primary ">Register Here</a>
                         </div>
-
                     </form>
                 </div>
             </div>

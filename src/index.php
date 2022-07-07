@@ -1,3 +1,21 @@
+<?php
+include 'config.php';
+session_start();
+
+$id = $_SESSION['id'];
+
+$query = $fluent->from('products')->where('user_id', $id);
+$products = $query->fetchAll();
+
+if(isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    $query = $fluent->delete()->from('products')->where('id', $id);
+    $delete = $query->execute();
+    header('Location: index.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +33,7 @@
             <div class="card border-5px shadow">
                 <div class="card-body">
                     <h2 class="text-muted ms-1"> Table </h2>
-                    <button type="button" class="btn btn-primary my-3">+Add New</button>
+                    <a href="add_product.php"><button type="button" class="btn btn-primary my-3">+Add New</button></a>
                     <div class=" table-responsive">
                         <table class="table">
                             <thead>
@@ -29,42 +47,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>$</td>
-                                    <td>
-                                        <button type="button" class="btn btn-info">View</button>
-                                        <button type="button" class="btn btn-success">Update</button>
-                                        <button type="button" class="btn btn-danger">Delete</button>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                    <td>$</td>
-                                    <td>
-                                        <button type="button" class="btn btn-info">View</button>
-                                        <button type="button" class="btn btn-success">Update</button>
-                                        <button type="button" class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                    <td>$</td>
-                                    <td>
-                                        <button type="button" class="btn btn-info">View</button>
-                                        <button type="button" class="btn btn-success">Update</button>
-                                        <button type="button" class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
+                                <?php
+                                foreach ($products as $row) {
+                                    echo "<tr>";
+                                    echo "<th scope='row'>{$row['id']}</th>";
+                                    echo "<td>{$row['name']}</td>";
+                                    echo "<td>{$row['user_id']}</td>";
+                                    echo "<td>{$row['price']}</td>";
+                                    echo "<td>{$row['amount']}</td>";
+                                    echo "<td>
+                                        <button type='button' class='btn btn-info'>View</button>
+                                        <button type='button' class='btn btn-success'>Update</button>
+                                        <a href='index.php?delete={$row['id']}'><button type='button' class='btn btn-danger'>Delete</button></a>
+                                    </td>";
+                                    echo "</tr>";
+                                }
+                                
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -75,4 +74,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
 </body>
+
 </html>

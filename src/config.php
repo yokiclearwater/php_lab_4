@@ -1,4 +1,6 @@
 <?php
+    require_once '../vendor/autoload.php';
+
     $server="localhost";
     $username="root";
     $password="";
@@ -9,4 +11,7 @@
     if(!$conn){
         echo "<script> alert('Connection Failed!') </script>";
     }
+
+    $fluent = new \Envms\FluentPDO\Query($conn);
+
 ?>
