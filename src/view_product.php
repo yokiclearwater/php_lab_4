@@ -1,3 +1,17 @@
+<?php
+session_start();
+include 'config.php';
+
+if(isset($_GET['view'])){
+    $id = $_GET['view'];
+    $query = $fluent -> from('products')->where('id',$id);
+    $product = $query->fetch();
+    
+}else{
+    $product = array('id'=> 0, 'name'=>'Empty','amount'=>0,'user_id'=>0,'price'=>0);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,21 +31,49 @@
                 <table class="table table-hover ">       
                 <tbody>
                         <tr>
+                            <th>ID: </th>
+                            <td>
+                               <?php
+                               echo $product['id'];
+                               ?>
+                            </td>
+                        </tr>
+                        <tr>
                         <th >Name:</th>
-                        <td> </td>
+                        <td>
+                        <?php
+                               echo $product['name'];
+                        ?>
+                        </td>
                         <tr>
                         <th >Amount:</th>
-                        <td> </td>
+                        <td>
+                        <?php
+                               echo $product['amount'];
+                         ?>
+                        </td>
                         <tr>
                         <th >User_Id:</th>
-                        <td> </td>
+                        <td> 
+                        <?php
+                               echo $product['user_id'];
+                        ?>
+                        </td>
                         <tr>
                         <th >Price:</th>
-                        <td> </td>     
-                        </tr>                       
+                        <td>
+                        <?php
+                               echo $product['price'];
+                        ?>    
+                        </td>     
+                        </tr>
+                                               
                     </tbody>
                 </table>
+
+                <a href="index.php">
                 <button type="button" class="btn btn-info ">Back</button>
+                </a>
             
             </div>    
         </div>  

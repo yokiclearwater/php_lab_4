@@ -5,17 +5,16 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = md5($_POST['password']);
 
+    // $sql = "SELECT * FROM users WHERE email=? AND password=?";
 
-    $sql = "SELECT * FROM users WHERE email=? AND password=?";
+    // $stmt = $conn->prepare($sql);
+    // $stmt->bindValue(1, $email, PDO::PARAM_STR);
+    // $stmt->bindValue(2, $password, PDO::PARAM_STR);
+    // $stmt->execute();
+    // $result = $stmt->fetchAll();
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bindValue(1, $email, PDO::PARAM_STR);
-    $stmt->bindValue(2, $password, PDO::PARAM_STR);
-    $stmt->execute();
-
-    $result = $stmt->fetchAll();
-
-    var_dump($result);
+    $query = $fluent->from('users')->where('email',$email)->where('password',$password);
+    $result = $query->fetchAll();
 
     if ($result) {
         $row = $result[0];
