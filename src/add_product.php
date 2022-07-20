@@ -46,6 +46,7 @@ if (isset($_POST['submit'])) {
                     <h2 class="text-muted ms-1"> Add Product </h2>
 
                     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+                    
                         <input type="text" name="name" id="" class="form-control my-4 py-2" placeholder="Product Name" required>
                         <input type="text" name="amount" id="" class="form-control my-4 py-2" placeholder="Amount" required>
                         <input type="text" name="price" id="" class="form-control my-4 py-2" placeholder="Price" required>

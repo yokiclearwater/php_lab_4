@@ -25,6 +25,8 @@ if(isset($_GET['delete'])) {
 
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,13 +68,14 @@ if(isset($_GET['delete'])) {
                                     echo "<td>{$row['price']}</td>";
                                     echo "<td>
                                         <a href='view_product.php?view={$row['id']}'><button type='button' class='btn btn-info'>View</button></a>
-                                        <button type='button' class='btn btn-success'>Update</button>
+                                        <a href='update.php?id={$row['id']}'><button type='button' class='btn btn-success'>Update</button></a>
                                         <a href='index.php?delete={$row['id']}'><button type='button' class='btn btn-danger'>Delete</button></a>
                                     </td>";
                                     echo "</tr>";
                                 }
                                 
                                 ?>
+
                             </tbody>
                         </table>
                     </div>
