@@ -8,14 +8,14 @@
         $gender = $_POST['gender'];
         $password = md5($_POST['password']);
 
-        $sql = "SELECT * FROM users WHERE email=?";
+        // $sql = "SELECT * FROM users WHERE email=?";
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(1, $email, PDO::PARAM_STR);
-        $stmt->execute();
-
-
-        $result = $stmt->fetchAll();
+        // $stmt = $conn->prepare($sql);
+        // $stmt->bindValue(1, $email, PDO::PARAM_STR);
+        // $stmt->execute();
+        // $result = $stmt->fetchAll();
+        $query =$fluent->from('users')->where('email',$email);
+        $result = $query->fetchAll();
 
         if(!$result){
             $sql = "INSERT INTO users(username,email,major,gender,password)

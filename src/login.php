@@ -4,7 +4,6 @@ session_start();
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = md5($_POST['password']);
-
     // $sql = "SELECT * FROM users WHERE email=? AND password=?";
 
     // $stmt = $conn->prepare($sql);
@@ -12,7 +11,6 @@ if (isset($_POST['submit'])) {
     // $stmt->bindValue(2, $password, PDO::PARAM_STR);
     // $stmt->execute();
     // $result = $stmt->fetchAll();
-
     $query = $fluent->from('users')->where('email',$email)->where('password',$password);
     $result = $query->fetchAll();
 
@@ -23,7 +21,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['gender'] = $row['gender'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['major'] = $row['major'];
-        header("Location: add_product.php");
+        header("Location: index.php");
     } else {
         echo "<script> alert('Email or Password is Wrong!') </script>";
     }
